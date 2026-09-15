@@ -1,0 +1,16 @@
+# Pin line endings so a Windows checkout does not silently corrupt shell scripts.
+# Lesson carried over from gstack-tutorial-2 (PLAYBOOK.md pitfall P4): a CRLF in a
+# .sh file fails with "xxx\r: command not found" and costs real debugging time.
+* text=auto eol=lf
+
+*.sh text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+
+*.mp4 binary
+*.srt text eol=lf
+*.png binary
+*.docx binary
+*.pptx binary
