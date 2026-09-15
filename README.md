@@ -47,11 +47,14 @@ lighter — one domain agent, not two, and its veto only fires on the one gate
 | [`docs/expertise_division.md`](docs/expertise_division.md) | **The Gate T5 procedure** — what the Bilingual Caption QA Specialist concretely does, RACI, defer clause |
 | [`reviews/01-ceo-review.md`](reviews/01-ceo-review.md) | First audit-trail record — a real REVISE→PASS review of this repo's own `PLAN.md`, blocking issues and all |
 | [`reviews/02-spec.md`](reviews/02-spec.md) | W1-W10 work breakdown, critical path, two escalations to the domain agent, and a revised (honest) time budget |
+| [`starter/scripts/run_gates.py`](starter/scripts/run_gates.py) | **Gates T1-T4 as runnable code**, plus a mechanised VOID guard against the T5 circularity trap. Verified against this tutorial's own pilot artifacts — see `reviews/03-eng-review.md` (next pass) for the run log. |
+| [`starter/versions.lock.template`](starter/versions.lock.template) | Per-run evidence template (Python/videocaptioner/ffmpeg versions, LLM provider, run date) — copy to `versions.lock` (gitignored) before your first real run |
+| [`reviews/03-eng-review.md`](reviews/03-eng-review.md) | `run_gates.py` proven against real pilot artifacts (PASS/VOID/FAIL all confirmed distinct); both spec-review escalations answered |
 
-**Not yet written** (next pass): `TUTORIAL.md` (+ `.zh.md`), `reviews/03-eng-review.md`
-onward (three more audit-trail records), `starter/scripts/run_gates.py` (the
-T1-T5 verification chain as runnable code, not just a design), `dist/`
-(bilingual docx/pptx), `.github/workflows/selfcheck.yml`.
+**Not yet written** (next pass): `TUTORIAL.md` (+ `.zh.md`), `reviews/04-qa-report.md`
+and `reviews/05-ship.md`, `dist/` (bilingual docx/pptx),
+`.github/workflows/selfcheck.yml`. Also open: the E2 sampling floor-and-scale
+fix designed in review 03 but not yet applied to `docs/expertise_division.md`.
 
 ---
 

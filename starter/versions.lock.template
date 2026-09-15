@@ -1,0 +1,33 @@
+# versions.lock — fill this in during Phase 0, BEFORE your first real run.
+#
+# Unlike tutorial #2 (a single upstream commit hash per tool), this pipeline
+# has no one canonical version to pin — record what YOU actually have, so a
+# future you (or a reader retracing your steps) knows exactly what produced
+# a given result. Copy this file to `versions.lock` (gitignored — it's
+# per-run evidence, not a repo constant) and fill in every line by running
+# the commands shown.
+
+# python --version
+python_version=
+
+# videocaptioner --version
+videocaptioner_version=
+
+# ffmpeg -version   (first line only, e.g. "ffmpeg version 9.0.1-full_build-www.gyan.dev")
+ffmpeg_version=
+
+# videocaptioner config get llm.api_base
+llm_api_base=
+
+# videocaptioner config get llm.model
+llm_model=
+
+# Date of this run (YYYY-MM-DD) — LLM providers change model behavior over
+# time even at a fixed model name; the date is part of the evidence.
+run_date=
+
+# Source clip identity — filename + duration (ffprobe -show_entries
+# format=duration), not the file itself (see ../.gitignore — never commit
+# real source video).
+source_clip_name=
+source_clip_duration_s=

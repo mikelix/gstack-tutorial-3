@@ -9,6 +9,10 @@
 /starter/output/
 *.srt.bak
 
+# Per-run evidence, not a repo constant — see starter/versions.lock.template.
+# Never commit the filled-in file; only the template is tracked.
+/starter/versions.lock
+
 # Scratch preview frames
 *_frame_*.png
 preview_frame*.png

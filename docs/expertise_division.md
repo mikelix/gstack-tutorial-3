@@ -68,6 +68,19 @@ condition exists to catch.
 **Sample.** Segments 1-5 (opening), a contiguous block from the ~50% mark,
 and the last 5 segments (closing) — same sampling rule already used for
 Gate T3's mechanical count check, reused here for the qualitative pass.
+**Known gap (per `reviews/02-spec.md` E2, `reviews/03-eng-review.md`):**
+this fixed sample under-covers long clips (~1% coverage on a 1000+ segment
+clip vs. ~40% on a short one). A floor-and-scale rule was designed but not
+yet applied here — treat Gate T5 as lower-confidence on long clips until
+that's implemented.
+
+**Register note (per `reviews/02-spec.md` E1).** Before scoring the four
+questions below, note the source clip's apparent register once — casual
+interview, formal presentation, tutorial narration, etc. This is context,
+not a fifth pass/fail axis: "natural" reads differently in a casual aside
+than in a keynote, and scoring register separately would either duplicate
+question 2 or produce false flags on clips with deliberately mixed
+register.
 
 **Per sampled segment, answer four questions:**
 

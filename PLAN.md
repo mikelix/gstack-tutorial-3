@@ -133,8 +133,11 @@ treating "2-4 h" as a commitment rather than a best case.
 ## 4. The 5-gate verification chain
 
 Modeled on tutorial #2's gate chain (`Gate 5/6/7A/7B-1R2` → `run_all.sh` exit
-codes), scaled to this subject. Full script: `starter/scripts/run_gates.py`
-(to be written in the next pass).
+codes), scaled to this subject. Full script:
+[`starter/scripts/run_gates.py`](starter/scripts/run_gates.py) — stdlib-only,
+verified against this tutorial's own pilot artifacts (T1-T4 all PASS on a
+real 89-second clip; the T5 circularity guard confirmed to VOID with exit
+code 2, and a genuine T2 mismatch confirmed to FAIL with exit code 1).
 
 | Gate | Name | Referee | What it checks |
 |---|---|---|---|
