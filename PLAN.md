@@ -26,8 +26,12 @@ re-encoded, cropped, or retimed.
   with macOS and Linux covered as secondary paths
 - ASR transcription (free `bijian` engine, English source)
 - Manual transcript correction pass (the tutorial teaches *why*, not just *how*)
-- LLM-backed translation to Chinese, target-only layout, with an explicit
-  no-silent-fallback rule (never Bing/Google unless asked for)
+- Translation to Chinese, target-only layout, with an explicit
+  no-silent-fallback rule. **Choosing the right translator for your own
+  machine, network, and API access is a taught step, not an assumption** —
+  see [`docs/choosing_a_translator.md`](docs/choosing_a_translator.md).
+  The pilot used an LLM backend (DeepSeek); a reader without that access
+  needs a different, deliberately-made choice.
 - Hard-burn synthesis with style control (font size, vertical position)
 - A 5-gate verification chain (§ below) with a stated **VOID** condition
 - Bilingual (EN + 简体中文) tutorial deliverables, mirroring tutorial #1/#2
@@ -144,6 +148,7 @@ code 2, and a genuine T2 mismatch confirmed to FAIL with exit code 1).
 | **T1** | Transcription completeness | `videocaptioner transcribe` exit status + segment count | Output `.srt` exists, segment count > 0 |
 | **T2** | Translator provenance | `videocaptioner config show` | `translate.service` matches the translator requested (e.g. `llm`) — catches a silent Bing/Google fallback |
 | **T3** | Segment parity | line-count diff | Target `.srt` segment count == source `.srt` segment count (no dropped/merged lines) |
+| **T3b** | Translation actually happened | Han-character + identity check | Target contains Chinese, and no segment is byte-identical to its source. **Added after a real silent-passthrough incident** — see `docs/choosing_a_translator.md` § 2 and `reviews/04-qa-report.md`. T2+T3+T4 all PASS on a passthrough file; only T3b catches it. |
 | **T4** | Synthesis fidelity | `ffprobe` diff | Captioned output's resolution + duration == source video's, exactly |
 | **T5** | Translation fidelity (domain) | Bilingual Caption QA Specialist | Spot-checked segments (start/middle/end) are natural, accurate Chinese — not literal/garbled, not a hallucination |
 
@@ -219,7 +224,9 @@ error is first seen, not discovered by searching for it afterward.
 | Risk | Rank | Mitigation |
 |---|---|---|
 | PowerShell strips quotes from `--style-override` JSON | **#1 — highest** | `starter/INSTALL.md` § 6, surfaced proactively during install verification, not just in troubleshooting |
-| Reader assumes `✓ Done` means the right translator ran | #2 | Gate T2 makes provenance-checking a named, mandatory step |
+| **Free translator silently emits untranslated English and exits 0** | **#1-equal — observed, not hypothetical** | Gate T3b catches it mechanically; `docs/choosing_a_translator.md` § 4 makes the reader probe their own access on a 2-segment file first |
+| Reader cannot access the translator the tutorial assumes (firewall, no API key, region) | #2 | `docs/choosing_a_translator.md` § 3 gives a decision guide keyed to the reader's situation instead of one blessed path |
+| Reader assumes `✓ Done` means the right translator ran | #3 | Gate T2 makes provenance-checking a named, mandatory step |
 | Reader collapses Gate T4 and T5 into one check (the circularity pitfall, § 4) | #3 | Called out explicitly, with the worked example from the pilot run, restated in `docs/expertise_division.md` § 5 |
 | Source video has pre-existing burned-in captions, reader misdiagnoses it as a videocaptioner bug | #4 | Dedicated troubleshooting section: check 2-3 source frames before assuming any overlap is the tool's fault |
 | LLM translation is non-deterministic run-to-run | #5 — lowest (expectation-setting, not a failure) | Stated as an explicit, honest out-of-scope item (§ 1) rather than silently claimed as reproducible |

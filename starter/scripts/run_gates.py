@@ -47,7 +47,7 @@ def count_srt_segments(path: Path) -> int:
     if not path.exists():
         print(f"ENV ERROR: srt file not found: {path}", file=sys.stderr)
         sys.exit(3)
-    text = path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8-sig")
     lines = text.splitlines()
     count = 0
     for i, line in enumerate(lines):
@@ -96,6 +96,76 @@ def gate_t3_segment_parity(source_srt: Path, target_srt: Path) -> None:
             f"(dropped or merged lines during translation)"
         )
     print(f"T3 PASS — {n_src} segments in both source and target")
+
+
+def _srt_text_blocks(path: Path) -> list[str]:
+    """Return each segment's text body (timestamp and index lines removed)."""
+    lines = path.read_text(encoding="utf-8-sig").splitlines()
+    blocks, current = [], []
+    for i, line in enumerate(lines):
+        s = line.strip()
+        if s.isdigit() and i + 1 < len(lines) and "-->" in lines[i + 1]:
+            if current:
+                blocks.append("\n".join(current).strip())
+            current = []
+            continue
+        if "-->" in s:
+            continue
+        if s:
+            current.append(s)
+    if current:
+        blocks.append("\n".join(current).strip())
+    return blocks
+
+
+def gate_t3b_translation_actually_happened(source_srt: Path, target_srt: Path,
+                                           target_language: str) -> None:
+    """Gate T3b — untranslated-passthrough detection.
+
+    Found the hard way (see reviews/04-qa-report.md): the `google` translator
+    can hit a 429 rate limit, log the error, emit the ORIGINAL ENGLISH as the
+    "translation", and still exit 0 with a cheerful `✓ Done (N segments)`.
+    T2 passes (the service really was google), T3 passes (segment counts
+    match) — and a reader ships an English-captioned video believing the
+    chain verified it.
+
+    Two independent checks, because either alone has a blind spot:
+      1. CJK presence — for a Chinese target, a translated file must contain
+         Han characters. Catches wholesale passthrough.
+      2. Per-segment identity — flags segments byte-identical to their source.
+         Catches partial passthrough, where only some batches failed.
+    """
+    src_blocks = _srt_text_blocks(source_srt)
+    tgt_blocks = _srt_text_blocks(target_srt)
+
+    if target_language.lower().startswith("zh"):
+        han = re.compile(r"[一-鿿]")
+        translated = sum(1 for b in tgt_blocks if han.search(b))
+        if translated == 0:
+            raise GateError(
+                f"T3b FAIL: target language is '{target_language}' but "
+                f"{target_srt.name} contains no Han characters at all — the "
+                f"translator almost certainly passed the source through "
+                f"untranslated (check its log for swallowed rate-limit or "
+                f"auth errors, even if it exited 0)"
+            )
+        ratio = translated / len(tgt_blocks) if tgt_blocks else 0
+        if ratio < 0.8:
+            raise GateError(
+                f"T3b FAIL: only {translated}/{len(tgt_blocks)} segments "
+                f"({ratio:.0%}) contain Han characters — partial passthrough, "
+                f"likely some batches failed silently"
+            )
+
+    if len(src_blocks) == len(tgt_blocks):
+        identical = sum(1 for s, t in zip(src_blocks, tgt_blocks) if s == t and s)
+        if identical:
+            raise GateError(
+                f"T3b FAIL: {identical}/{len(src_blocks)} segments are "
+                f"byte-identical to the source — untranslated passthrough"
+            )
+
+    print(f"T3b PASS — target is genuinely translated, not source passthrough")
 
 
 def _ffprobe_json(video: Path) -> dict:
@@ -183,6 +253,8 @@ def main() -> int:
     p.add_argument("--target-srt", required=True, type=Path)
     p.add_argument("--output-video", required=True, type=Path)
     p.add_argument("--translator", default="llm", help="expected translate.service (default: llm)")
+    p.add_argument("--target-language", default="zh-Hans",
+                   help="BCP 47 target language, used by Gate T3b (default: zh-Hans)")
     p.add_argument(
         "--ocr-check", action="store_true",
         help="deliberately trigger the T5 circularity guard (VOID) — for demonstrating the trap, not for real use",
@@ -193,6 +265,7 @@ def main() -> int:
         gate_t1_transcription(args.source_srt)
         gate_t2_translator_provenance(args.translator)
         gate_t3_segment_parity(args.source_srt, args.target_srt)
+        gate_t3b_translation_actually_happened(args.source_srt, args.target_srt, args.target_language)
         gate_t4_synthesis_fidelity(args.source_video, args.output_video)
         gate_t5_guard(args.ocr_check)
     except GateError as e:

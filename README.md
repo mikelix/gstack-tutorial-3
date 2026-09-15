@@ -50,11 +50,13 @@ lighter — one domain agent, not two, and its veto only fires on the one gate
 | [`starter/scripts/run_gates.py`](starter/scripts/run_gates.py) | **Gates T1-T4 as runnable code**, plus a mechanised VOID guard against the T5 circularity trap. Verified against this tutorial's own pilot artifacts — see `reviews/03-eng-review.md` (next pass) for the run log. |
 | [`starter/versions.lock.template`](starter/versions.lock.template) | Per-run evidence template (Python/videocaptioner/ffmpeg versions, LLM provider, run date) — copy to `versions.lock` (gitignored) before your first real run |
 | [`reviews/03-eng-review.md`](reviews/03-eng-review.md) | `run_gates.py` proven against real pilot artifacts (PASS/VOID/FAIL all confirmed distinct); both spec-review escalations answered |
+| [`docs/choosing_a_translator.md`](docs/choosing_a_translator.md) | **Which translator for YOUR machine/network/budget** — decision guide, observed availability, and a 2-minute probe to run before committing to a long clip |
+| [`reviews/04-qa-report.md`](reviews/04-qa-report.md) | Five findings, one critical: a free translator that silently emits untranslated English and exits 0, defeating four of five gates. Drove Gate T3b. |
 
-**Not yet written** (next pass): `TUTORIAL.md` (+ `.zh.md`), `reviews/04-qa-report.md`
-and `reviews/05-ship.md`, `dist/` (bilingual docx/pptx),
-`.github/workflows/selfcheck.yml`. Also open: the E2 sampling floor-and-scale
-fix designed in review 03 but not yet applied to `docs/expertise_division.md`.
+**Not yet written** (next pass): `TUTORIAL.md` (+ `.zh.md`), `reviews/05-ship.md`,
+`dist/` (bilingual docx/pptx), `.github/workflows/selfcheck.yml`. Also open: the
+E2 sampling floor-and-scale fix designed in review 03 but not yet applied to
+`docs/expertise_division.md`.
 
 ---
 
