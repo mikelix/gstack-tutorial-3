@@ -27,7 +27,7 @@ translation is deterministic — see `PLAN.md` § 1 for the honest scope line.
 | Team | 5 gstack roles | 5 roles × 2 domain agents | 5 roles × 1 domain agent |
 | Proof of done | review notes merge | gate chain PASS + GDS SHA match | gate chain PASS (T1-T4) + fidelity review (T5) |
 | Environment | none | multi-GB open EDA + open PDK | one `pip install` + FFmpeg |
-| Setup time | minutes | 10-14 h | 2-4 h (see `PLAN.md` § 3) |
+| Setup time | minutes | 10-14 h | 2-4 h best case / 2.5-7 h honest range (see `reviews/02-spec.md`) |
 
 Tutorial #2 proved the "gstack + domain agent(s) + gate chain" pattern on a
 genuinely hard subject (silicon). Tutorial #3 asks the opposite question:
@@ -46,9 +46,10 @@ lighter — one domain agent, not two, and its veto only fires on the one gate
 | [`starter/INSTALL.md`](starter/INSTALL.md) | **Step-by-step videocaptioner install** — Windows 11 (primary, fully detailed), macOS, Linux |
 | [`docs/expertise_division.md`](docs/expertise_division.md) | **The Gate T5 procedure** — what the Bilingual Caption QA Specialist concretely does, RACI, defer clause |
 | [`reviews/01-ceo-review.md`](reviews/01-ceo-review.md) | First audit-trail record — a real REVISE→PASS review of this repo's own `PLAN.md`, blocking issues and all |
+| [`reviews/02-spec.md`](reviews/02-spec.md) | W1-W10 work breakdown, critical path, two escalations to the domain agent, and a revised (honest) time budget |
 
-**Not yet written** (next pass): `TUTORIAL.md` (+ `.zh.md`), `reviews/02-spec.md`
-onward (four more audit-trail records), `starter/scripts/run_gates.py` (the
+**Not yet written** (next pass): `TUTORIAL.md` (+ `.zh.md`), `reviews/03-eng-review.md`
+onward (three more audit-trail records), `starter/scripts/run_gates.py` (the
 T1-T5 verification chain as runnable code, not just a design), `dist/`
 (bilingual docx/pptx), `.github/workflows/selfcheck.yml`.
 

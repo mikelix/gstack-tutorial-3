@@ -122,8 +122,11 @@ than tutorial #2's, because the subject is lower-stakes than silicon.
 | **5 — Ship** | owner | packaged release + bilingual docs | `/ship` complete |
 
 Time budget: **2-4 h** for a first run on a short clip (under 5 min), including
-install time. Materially less than tutorial #2's 10-14 h — the toolchain is a
-single `pip install`, not a multi-gigabyte EDA compile.
+install time, in the no-surprises case. Materially less than tutorial #2's
+10-14 h — the toolchain is a single `pip install`, not a multi-gigabyte EDA
+compile. `reviews/02-spec.md` revises this to **2.5-7 h** as the honest range
+once the #1-ranked risk (§ 7) is accounted for — read that review before
+treating "2-4 h" as a commitment rather than a best case.
 
 ---
 
