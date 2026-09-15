@@ -48,6 +48,7 @@ REQUIRED = [
     "dist/gstack-tutorial-3_ZH.pptx",
     "dist/gstack-tutorial-3_EN.docx",
     "dist/gstack-tutorial-3_ZH.docx",
+    "docs/deck_market_benchmark.md",
 ]
 
 failures: list[str] = []
