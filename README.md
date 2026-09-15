@@ -1,10 +1,9 @@
 # gstack-tutorial-3 — English → Chinese Video Captioning with videocaptioner
 
-> **Status: skeleton.** This is the "first 90 minutes" scaffold per
-> [`gstack-tutorial-2/PLAYBOOK.md`](https://github.com/mikelix/gstack-tutorial-2/blob/main/PLAYBOOK.md)
-> § 6 — scope, gate-chain design, and the install guide are locked; the full
-> step-by-step `TUTORIAL.md`, the five audit-trail reviews (`reviews/`), and
-> the bilingual docx/pptx exports have not been written yet.
+> **Status: complete in Markdown, bilingual, self-checked.** Tutorial body
+> (EN + 简体中文), gate chain as runnable code, four audit-trail reviews, and
+> a CI self-check (63 checks) are all in place. Remaining: `reviews/05-ship.md`
+> and the `dist/` docx/pptx exports.
 
 **What this is.** A hands-on tutorial: use the **gstack** agent workflow plus
 one domain agent (a Bilingual Caption QA Specialist) to build and verify a
@@ -42,6 +41,8 @@ lighter — one domain agent, not two, and its veto only fires on the one gate
 
 | Path | Purpose |
 |---|---|
+| **[`TUTORIAL.md`](TUTORIAL.md)** | **The step-by-step course — start here.** Part 0 mental model → install → translator choice → the five gstack phases → verification → troubleshooting → appendices |
+| [`TUTORIAL.zh.md`](TUTORIAL.zh.md) | 简体中文版，与英文版逐节对应（parity enforced in CI） |
 | [`PLAN.md`](PLAN.md) | Scope, team topology, 5-gate verification chain, ranked risks, Definition of Done |
 | [`starter/INSTALL.md`](starter/INSTALL.md) | **Step-by-step videocaptioner install** — Windows 11 (primary, fully detailed), macOS, Linux |
 | [`docs/expertise_division.md`](docs/expertise_division.md) | **The Gate T5 procedure** — what the Bilingual Caption QA Specialist concretely does, RACI, defer clause |
@@ -52,11 +53,12 @@ lighter — one domain agent, not two, and its veto only fires on the one gate
 | [`reviews/03-eng-review.md`](reviews/03-eng-review.md) | `run_gates.py` proven against real pilot artifacts (PASS/VOID/FAIL all confirmed distinct); both spec-review escalations answered |
 | [`docs/choosing_a_translator.md`](docs/choosing_a_translator.md) | **Which translator for YOUR machine/network/budget** — decision guide, observed availability, and a 2-minute probe to run before committing to a long clip |
 | [`reviews/04-qa-report.md`](reviews/04-qa-report.md) | Five findings, one critical: a free translator that silently emits untranslated English and exits 0, defeating four of five gates. Drove Gate T3b. |
+| `.github/scripts/selfcheck.py` | 63 checks: required files, every markdown link, EN/ZH parity, gate-script compile + exit-code contract, BOM-safe reads |
+| `.github/workflows/selfcheck.yml` | CI — runs the self-check and asserts `run_gates.py` exits 3 on missing input rather than passing vacuously |
 
-**Not yet written** (next pass): `TUTORIAL.md` (+ `.zh.md`), `reviews/05-ship.md`,
-`dist/` (bilingual docx/pptx), `.github/workflows/selfcheck.yml`. Also open: the
-E2 sampling floor-and-scale fix designed in review 03 but not yet applied to
-`docs/expertise_division.md`.
+**Not yet written:** `reviews/05-ship.md`, `dist/` (bilingual docx/pptx). Also
+open: the E2 sampling floor-and-scale fix designed in review 03 but not yet
+applied to `docs/expertise_division.md`.
 
 ---
 

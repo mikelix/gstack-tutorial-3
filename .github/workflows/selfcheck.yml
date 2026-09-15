@@ -1,0 +1,41 @@
+name: repo self-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  selfcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          # Matches the tutorial's own constraint (>=3.10,<3.13).
+          python-version: '3.12'
+
+      - name: Repo self-check
+        run: python .github/scripts/selfcheck.py
+
+      - name: Gate script argument contract
+        # Not a full pipeline run (no video, no API key in CI) — just proves
+        # the script's interface is intact and it fails loudly on a missing
+        # file rather than passing vacuously.
+        run: |
+          python starter/scripts/run_gates.py --help > /dev/null
+          set +e
+          python starter/scripts/run_gates.py \
+            --source-video  /nonexistent.mp4 \
+            --source-srt    /nonexistent.srt \
+            --target-srt    /nonexistent.srt \
+            --output-video  /nonexistent.mp4
+          code=$?
+          set -e
+          if [ "$code" != "3" ]; then
+            echo "expected exit 3 (environment error) for missing files, got $code"
+            exit 1
+          fi
+          echo "run_gates.py correctly returns 3 on missing input"
