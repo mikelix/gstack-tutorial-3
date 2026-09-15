@@ -42,13 +42,15 @@ lighter — one domain agent, not two, and its veto only fires on the one gate
 
 | Path | Purpose |
 |---|---|
-| [`PLAN.md`](PLAN.md) | Scope, team topology, 5-gate verification chain, Definition of Done |
+| [`PLAN.md`](PLAN.md) | Scope, team topology, 5-gate verification chain, ranked risks, Definition of Done |
 | [`starter/INSTALL.md`](starter/INSTALL.md) | **Step-by-step videocaptioner install** — Windows 11 (primary, fully detailed), macOS, Linux |
+| [`docs/expertise_division.md`](docs/expertise_division.md) | **The Gate T5 procedure** — what the Bilingual Caption QA Specialist concretely does, RACI, defer clause |
+| [`reviews/01-ceo-review.md`](reviews/01-ceo-review.md) | First audit-trail record — a real REVISE→PASS review of this repo's own `PLAN.md`, blocking issues and all |
 
-**Not yet written** (next pass, per the scope decision that produced this
-skeleton): `TUTORIAL.md` (+ `.zh.md`), `reviews/` (five audit-trail records),
-`starter/scripts/run_gates.py` (the T1-T5 verification chain as runnable
-code), `docs/`, `dist/` (bilingual docx/pptx), `.github/workflows/selfcheck.yml`.
+**Not yet written** (next pass): `TUTORIAL.md` (+ `.zh.md`), `reviews/02-spec.md`
+onward (four more audit-trail records), `starter/scripts/run_gates.py` (the
+T1-T5 verification chain as runnable code, not just a design), `dist/`
+(bilingual docx/pptx), `.github/workflows/selfcheck.yml`.
 
 ---
 

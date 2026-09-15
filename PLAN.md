@@ -46,13 +46,24 @@ re-encoded, cropped, or retimed.
   problem, not a subtitle problem — see the playbook's own lesson on this,
   carried over from the pilot run this tutorial is based on).
 
-**Positioning (honest numbers)**
+**Positioning (concrete claim, not a percentage)**
 This is a content-production workflow tutorial, not a linguistics or ASR
-research project. Teaching/production-readiness objective: high (~85-95%) —
-the pipeline is simple enough to actually reach "done, verified" within one
-sitting, unlike tutorial #2's EDA toolchain. The harder part is not the
-mechanics, it's building the habit of *verifying* each stage before trusting
-it — that is the actual content of this tutorial.
+research project. The falsifiable claim: **a reader with no prior
+`videocaptioner` experience can go from a raw English clip to a captioned
+Chinese output they have concrete evidence to trust — not just watched and
+liked the look of — inside one sitting**, using the 5-gate chain in § 4 as
+the evidence. The harder part is not the mechanics (a single `pip install`),
+it's building the habit of verifying each stage before trusting it — that is
+the actual content of this tutorial.
+
+*Basis for "one sitting" (so this claim can be checked, unlike a bare
+percentage):* this tutorial's own pilot run completed transcription,
+translation, synthesis, and both a style revision and a full re-verification
+pass on an 89-second clip in well under an hour of active work, excluding
+one-time install and the PowerShell-quoting detour (§ 7). A longer clip
+(spaceX1, 41 minutes) added no new *steps* — only wall-clock time for the
+LLM translation of 1086 segments and the video re-encode. Scaling is linear
+in clip length, not step count.
 
 ---
 
@@ -183,13 +194,29 @@ as tutorial #2.
 
 ## 7. Known risks
 
-| Risk | Mitigation |
-|---|---|
-| Reader assumes `✓ Done` means the right translator ran | Gate T2 makes provenance-checking a named, mandatory step |
-| Reader collapses Gate T4 and T5 into one check (the circularity pitfall, § 4) | Called out explicitly, with the worked example from the pilot run |
-| Windows PowerShell mangles `--style-override` JSON silently (real pitfall hit while building the pilot for this tutorial) | Documented verbatim in `starter/INSTALL.md` and the troubleshooting section, with the exact backslash-escaping fix |
-| Source video has pre-existing burned-in captions, reader misdiagnoses it as a videocaptioner bug | Dedicated troubleshooting section: check 2-3 source frames before assuming any overlap is the tool's fault |
-| LLM translation is non-deterministic run-to-run | Stated as an explicit, honest out-of-scope item (§ 1) rather than silently claimed as reproducible |
+**Highest-probability drop-out point, named (per CEO review B3,
+`reviews/01-ceo-review.md`):** the PowerShell JSON-quoting failure on
+`--style-override`. It doesn't just fail — it fails with an error message
+("Expecting property name enclosed in double quotes") that points a reader
+toward suspecting their own JSON syntax, when the actual cause is invisible
+quote-stripping by PowerShell before the argument ever reaches the tool. It
+hit this tutorial's own pilot run twice before being correctly diagnosed.
+Unlike a install-time failure (annoying but expected), this one strikes
+*mid-project*, after a reader has already succeeded at transcription and
+translation and reasonably expects the easy part (a style tweak) to just
+work — which is exactly when a reader is most likely to give up rather than
+debug. **Mitigation: `starter/INSTALL.md` § 6 surfaces this *before* the
+reader ever runs a style-override command**, not only in the reactive
+troubleshooting table at the bottom — so the fix is already known when the
+error is first seen, not discovered by searching for it afterward.
+
+| Risk | Rank | Mitigation |
+|---|---|---|
+| PowerShell strips quotes from `--style-override` JSON | **#1 — highest** | `starter/INSTALL.md` § 6, surfaced proactively during install verification, not just in troubleshooting |
+| Reader assumes `✓ Done` means the right translator ran | #2 | Gate T2 makes provenance-checking a named, mandatory step |
+| Reader collapses Gate T4 and T5 into one check (the circularity pitfall, § 4) | #3 | Called out explicitly, with the worked example from the pilot run, restated in `docs/expertise_division.md` § 5 |
+| Source video has pre-existing burned-in captions, reader misdiagnoses it as a videocaptioner bug | #4 | Dedicated troubleshooting section: check 2-3 source frames before assuming any overlap is the tool's fault |
+| LLM translation is non-deterministic run-to-run | #5 — lowest (expectation-setting, not a failure) | Stated as an explicit, honest out-of-scope item (§ 1) rather than silently claimed as reproducible |
 
 ---
 
