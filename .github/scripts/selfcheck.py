@@ -23,11 +23,14 @@ ROOT = Path(__file__).resolve().parents[2]
 
 REQUIRED = [
     "README.md",
+    "LICENSE.md",
     "PLAN.md",
     "TUTORIAL.md",
     "TUTORIAL.zh.md",
     "docs/expertise_division.md",
+    "docs/expertise_division.zh.md",
     "docs/choosing_a_translator.md",
+    "docs/choosing_a_translator.zh.md",
     "reviews/01-ceo-review.md",
     "reviews/02-spec.md",
     "reviews/03-eng-review.md",
@@ -49,6 +52,7 @@ REQUIRED = [
     "dist/gstack-tutorial-3_EN.docx",
     "dist/gstack-tutorial-3_ZH.docx",
     "docs/deck_market_benchmark.md",
+    "reviews/05-ship.md",
 ]
 
 failures: list[str] = []
@@ -83,7 +87,7 @@ for md in sorted(ROOT.rglob("*.md")):
         rel_label = f"{md.relative_to(ROOT)} -> {target}"
         check(rel_label, resolved.exists())
 
-print("\n3. EN/ZH parity")
+print("\n3. EN/ZH parity (TUTORIAL.md only -- see below for scope)")
 en = (ROOT / "TUTORIAL.md").read_text(encoding="utf-8-sig")
 zh = (ROOT / "TUTORIAL.zh.md").read_text(encoding="utf-8-sig")
 for label, pattern in [

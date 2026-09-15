@@ -1,9 +1,10 @@
 # gstack-tutorial-3 — English → Chinese Video Captioning with videocaptioner
 
-> **Status: complete in Markdown, bilingual, self-checked.** Tutorial body
-> (EN + 简体中文), gate chain as runnable code, four audit-trail reviews, and
-> a CI self-check (63 checks) are all in place. Remaining: `reviews/05-ship.md`
-> and the `dist/` docx/pptx exports.
+> **Status: shipped locally, not yet published.** All five audit-trail
+> reviews, bilingual tutorial + reference docs, gate chain as verified
+> runnable code, bilingual `.pptx`/`.docx` deliverables, `LICENSE.md`, and a
+> 97-check CI self-check are all in place (`reviews/05-ship.md`). No GitHub
+> repository exists yet — publishing is a separate, explicit step.
 
 **What this is.** A hands-on tutorial: use the **gstack** agent workflow plus
 one domain agent (a Bilingual Caption QA Specialist) to build and verify a
@@ -45,13 +46,13 @@ lighter — one domain agent, not two, and its veto only fires on the one gate
 | [`TUTORIAL.zh.md`](TUTORIAL.zh.md) | 简体中文版，与英文版逐节对应（parity enforced in CI） |
 | [`PLAN.md`](PLAN.md) | Scope, team topology, 5-gate verification chain, ranked risks, Definition of Done |
 | [`starter/INSTALL.md`](starter/INSTALL.md) | **Step-by-step videocaptioner install** — Windows 11 (primary, fully detailed), macOS, Linux |
-| [`docs/expertise_division.md`](docs/expertise_division.md) | **The Gate T5 procedure** — what the Bilingual Caption QA Specialist concretely does, RACI, defer clause |
+| [`docs/expertise_division.md`](docs/expertise_division.md) / [`.zh.md`](docs/expertise_division.zh.md) | **The Gate T5 procedure** — what the Bilingual Caption QA Specialist concretely does, RACI, defer clause |
 | [`reviews/01-ceo-review.md`](reviews/01-ceo-review.md) | First audit-trail record — a real REVISE→PASS review of this repo's own `PLAN.md`, blocking issues and all |
 | [`reviews/02-spec.md`](reviews/02-spec.md) | W1-W10 work breakdown, critical path, two escalations to the domain agent, and a revised (honest) time budget |
 | [`starter/scripts/run_gates.py`](starter/scripts/run_gates.py) | **Gates T1-T4 as runnable code**, plus a mechanised VOID guard against the T5 circularity trap. Verified against this tutorial's own pilot artifacts — see `reviews/03-eng-review.md` (next pass) for the run log. |
 | [`starter/versions.lock.template`](starter/versions.lock.template) | Per-run evidence template (Python/videocaptioner/ffmpeg versions, LLM provider, run date) — copy to `versions.lock` (gitignored) before your first real run |
 | [`reviews/03-eng-review.md`](reviews/03-eng-review.md) | `run_gates.py` proven against real pilot artifacts (PASS/VOID/FAIL all confirmed distinct); both spec-review escalations answered |
-| [`docs/choosing_a_translator.md`](docs/choosing_a_translator.md) | **Which translator for YOUR machine/network/budget** — decision guide, observed availability, and a 2-minute probe to run before committing to a long clip |
+| [`docs/choosing_a_translator.md`](docs/choosing_a_translator.md) / [`.zh.md`](docs/choosing_a_translator.zh.md) | **Which translator for YOUR machine/network/budget** — decision guide, observed availability, and a 2-minute probe to run before committing to a long clip |
 | [`reviews/04-qa-report.md`](reviews/04-qa-report.md) | Five findings, one critical: a free translator that silently emits untranslated English and exits 0, defeating four of five gates. Drove Gate T3b. |
 | [`dist/`](dist/README.md) | **Generated deliverables** — bilingual `.pptx` (31 slides) and `.docx` (15/17 pp.) in McKinsey house style. Never hand-edit; rebuild from `_build/`. |
 | `_build/` | Exporters: `mck.py` slide primitives, `deck_content.py` / `doc_content.py` (single bilingual source), builders, `verify_docx.py` |
@@ -73,9 +74,11 @@ Calibri body, Consolas code, Microsoft YaHei for Chinese with `eastAsia` set
 on every run. The deck adds **action titles** — every slide title is the
 takeaway as a sentence, so reading titles alone gives the whole argument.
 
-**Not yet written:** `reviews/05-ship.md`. Also open: the E2 sampling
-floor-and-scale fix designed in review 03 but not yet applied to
-`docs/expertise_division.md`.
+| [`reviews/05-ship.md`](reviews/05-ship.md) | Final release audit — found and fixed two real blocking issues (missing ZH reference docs, missing LICENSE.md) by checking against tutorial #2's actual shipped structure rather than assuming parity |
+| [`LICENSE.md`](LICENSE.md) | CC BY 4.0 prose / Apache-2.0 code, backing the claim every document footer already made |
+
+All five audit-trail reviews are now on record. Not yet done: publishing to
+GitHub (see `reviews/05-ship.md`, "Not shipped").
 
 ---
 

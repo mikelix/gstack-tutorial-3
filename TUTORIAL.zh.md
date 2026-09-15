@@ -73,7 +73,7 @@ English version: [`TUTORIAL.md`](TUTORIAL.md)
 T1-T4 以代码形式运行：
 [`starter/scripts/run_gates.py`](starter/scripts/run_gates.py)。
 T5 是一套由双语审阅者执行的流程：
-[`docs/expertise_division.md`](docs/expertise_division.md) 第 4 节。
+[`docs/expertise_division.zh.md`](docs/expertise_division.zh.md) 第 4 节。
 
 ### 0.4 为什么有一道关卡无法自动化
 
@@ -84,7 +84,7 @@ gstack 的流程角色能数分段、比对时长、在配置文件里检索字�
 
 教程 #2 把这称为**双钥匙系统**（流程权威 vs 物理权威）。本教程是它的
 轻量版：一位领域审阅者，其否决权只在一道关卡上生效。完整契约见
-[`docs/expertise_division.md`](docs/expertise_division.md)。
+[`docs/expertise_division.zh.md`](docs/expertise_division.zh.md)。
 
 ### 0.5 循环论证陷阱（在你发明自己的检查方法之前先读这节）
 
@@ -151,7 +151,7 @@ videocaptioner doctor
 
 这是你与其他每一位读者之间最可能不同的一部分。
 
-**请阅读：[`docs/choosing_a_translator.md`](docs/choosing_a_translator.md)。**
+**请阅读：[`docs/choosing_a_translator.zh.md`](docs/choosing_a_translator.zh.md)。**
 
 简要版：
 
@@ -386,7 +386,7 @@ T5 NOT AUTO-VERIFIED — run docs/expertise_division.md section 4 by hand
 ### 6.2 人工执行 Gate T5
 
 脚本打印 `T5 NOT AUTO-VERIFIED`，它是认真的。请按
-[`docs/expertise_division.md`](docs/expertise_division.md) 第 4 节执行：
+[`docs/expertise_division.zh.md`](docs/expertise_division.zh.md) 第 4 节执行：
 
 **输入：** 英文 `.srt` 和中文 `.srt` —— **绝不是视频**。
 **抽样：** 第 1-5 段、约 50% 处的一段，以及最后 5 段。
@@ -436,7 +436,7 @@ ffmpeg -y -ss 30 -i myclip_captioned_v2.mp4 -frames:v 1 -update 1 check30.png
 | 现象 | 原因 | 处理 |
 |---|---|---|
 | `--style-override` 报 JSON 错误，但命令看起来没问题 | PowerShell 剥掉了引号 | 反斜杠转义：`'{\"font_size\":56}'` |
-| 翻译"成功"但输出是英文 | 免费翻译器吞掉了限流错误 | Gate T3b 能抓到。换翻译服务 —— 见 `docs/choosing_a_translator.md` |
+| 翻译"成功"但输出是英文 | 免费翻译器吞掉了限流错误 | Gate T3b 能抓到。换翻译服务 —— 见 `docs/choosing_a_translator.zh.md` |
 | `Failed to init Bing session: 404` | 上游端点已变更 | 改用 `llm` 或 `google`；见翻译服务指南 |
 | Gate T1 数出的分段比预期少一个 | 首行有 UTF-8 BOM | `run_gates.py` 已修复（用 `utf-8-sig` 读取）。若你自己写了工具，请同样用 `utf-8-sig` |
 | 中文字幕与画面上已有文字重叠 | 源视频有已烧录字幕 | 见第 5.1 节 —— 调大 `margin_bottom`；源文字无法移除 |

@@ -65,14 +65,29 @@ only re-proves Gate T4 (synthesis didn't corrupt the text); it says nothing
 about translation fidelity and is the exact circularity this tutorial's VOID
 condition exists to catch.
 
-**Sample.** Segments 1-5 (opening), a contiguous block from the ~50% mark,
-and the last 5 segments (closing) — same sampling rule already used for
-Gate T3's mechanical count check, reused here for the qualitative pass.
-**Known gap (per `reviews/02-spec.md` E2, `reviews/03-eng-review.md`):**
-this fixed sample under-covers long clips (~1% coverage on a 1000+ segment
-clip vs. ~40% on a short one). A floor-and-scale rule was designed but not
-yet applied here — treat Gate T5 as lower-confidence on long clips until
-that's implemented.
+**Sample — floor-and-scale rule (closes `reviews/02-spec.md` E2).**
+
+*Floor, every clip:* segments 1-5 (opening), a contiguous block from the
+~50% mark, and the last 5 segments (closing) — 15 segments minimum.
+
+*Scale, clips over 100 segments:* add `min((N - 100) // 200, 5)` additional
+5-segment blocks, placed at evenly spaced points across the timeline (e.g.
+~20%, ~40%, ~60%, ~80% marks, skipping the point already covered by the
+floor's ~50% block). The `min(..., 5)` cap means the sample never exceeds
+15 + 5×5 = **40 segments**, so review time stays bounded regardless of clip
+length.
+
+| Clip | Segments (N) | Floor | Extra blocks | Total sampled | Coverage |
+|---|---|---|---|---|---|
+| Elon Musk pilot | 32 | 15 | 0 | 15 | 47% |
+| spaceX1 pilot | 1086 | 15 | `(1086-100)//200 = 4` | 35 | 3.2% (was 1.2% under the old fixed rule) |
+| A hypothetical 5,000-segment clip | 5,000 | 15 | `min(24, 5) = 5` (capped) | 40 | 0.8% |
+
+This does not make Gate T5 exhaustive on long clips — it was never going to
+be, short of reviewing every segment — but it roughly triples coverage on a
+clip spaceX1's length and keeps the cap from letting a very long clip's
+sample shrink toward zero percent. Treat Gate T5 as lower-confidence on long
+clips regardless; that is a property of sampling, not a defect in the rule.
 
 **Register note (per `reviews/02-spec.md` E1).** Before scoring the four
 questions below, note the source clip's apparent register once — casual
