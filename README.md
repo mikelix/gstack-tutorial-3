@@ -53,12 +53,29 @@ lighter — one domain agent, not two, and its veto only fires on the one gate
 | [`reviews/03-eng-review.md`](reviews/03-eng-review.md) | `run_gates.py` proven against real pilot artifacts (PASS/VOID/FAIL all confirmed distinct); both spec-review escalations answered |
 | [`docs/choosing_a_translator.md`](docs/choosing_a_translator.md) | **Which translator for YOUR machine/network/budget** — decision guide, observed availability, and a 2-minute probe to run before committing to a long clip |
 | [`reviews/04-qa-report.md`](reviews/04-qa-report.md) | Five findings, one critical: a free translator that silently emits untranslated English and exits 0, defeating four of five gates. Drove Gate T3b. |
-| `.github/scripts/selfcheck.py` | 63 checks: required files, every markdown link, EN/ZH parity, gate-script compile + exit-code contract, BOM-safe reads |
+| [`dist/`](dist/README.md) | **Generated deliverables** — bilingual `.pptx` (31 slides) and `.docx` (15/17 pp.) in McKinsey house style. Never hand-edit; rebuild from `_build/`. |
+| `_build/` | Exporters: `mck.py` slide primitives, `deck_content.py` / `doc_content.py` (single bilingual source), builders, `verify_docx.py` |
+| `.github/scripts/selfcheck.py` | 87 checks: required files, every markdown link, EN/ZH parity, gate-script compile + exit-code contract, BOM-safe reads, deliverable integrity |
 | `.github/workflows/selfcheck.yml` | CI — runs the self-check and asserts `run_gates.py` exits 3 on missing input rather than passing vacuously |
 
-**Not yet written:** `reviews/05-ship.md`, `dist/` (bilingual docx/pptx). Also
-open: the E2 sampling floor-and-scale fix designed in review 03 but not yet
-applied to `docs/expertise_division.md`.
+### Deliverables
+
+| Format | English | 简体中文 |
+|---|---|---|
+| Markdown (source of truth) | [`TUTORIAL.md`](TUTORIAL.md) | [`TUTORIAL.zh.md`](TUTORIAL.zh.md) |
+| PowerPoint (31 slides) | `dist/gstack-tutorial-3_EN.pptx` | `dist/gstack-tutorial-3_ZH.pptx` |
+| MS Word | `dist/gstack-tutorial-3_EN.docx` | `dist/gstack-tutorial-3_ZH.docx` |
+
+Both editions of both formats generate from **one** content structure in
+which every string is an `L(en, zh)` pair, so EN and ZH cannot drift apart
+in structure. Style follows `MCKINSEY_DOCX_PLAYBOOK.docx`: navy `#1F4E78`,
+Calibri body, Consolas code, Microsoft YaHei for Chinese with `eastAsia` set
+on every run. The deck adds **action titles** — every slide title is the
+takeaway as a sentence, so reading titles alone gives the whole argument.
+
+**Not yet written:** `reviews/05-ship.md`. Also open: the E2 sampling
+floor-and-scale fix designed in review 03 but not yet applied to
+`docs/expertise_division.md`.
 
 ---
 

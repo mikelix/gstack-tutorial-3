@@ -17,6 +17,9 @@
 *_frame_*.png
 preview_frame*.png
 
+# dist/ IS tracked — the generated .docx/.pptx are deliverables, same as
+# gstack-tutorial-2. Do not add dist/ here.
+
 # Python / build
 __pycache__/
 *.pyc

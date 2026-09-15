@@ -37,6 +37,17 @@ REQUIRED = [
     "starter/scripts/run_gates.py",
     ".gitattributes",
     ".gitignore",
+    "_build/mck.py",
+    "_build/deck_content.py",
+    "_build/build_deck.py",
+    "_build/doc_content.py",
+    "_build/build_docx.py",
+    "_build/verify_docx.py",
+    "dist/README.md",
+    "dist/gstack-tutorial-3_EN.pptx",
+    "dist/gstack-tutorial-3_ZH.pptx",
+    "dist/gstack-tutorial-3_EN.docx",
+    "dist/gstack-tutorial-3_ZH.docx",
 ]
 
 failures: list[str] = []
@@ -100,6 +111,29 @@ print("\n5. BOM-safe reads (QA report finding 5)")
 bad = re.findall(r'encoding="utf-8"', gates_src)
 check("no plain utf-8 reads in run_gates.py", not bad,
       f"{len(bad)} occurrence(s) — use utf-8-sig, Windows tools emit BOMs")
+
+print("\n6. Deliverables are generated, not hand-made")
+# Both editions must come from the SAME content module — the guarantee that
+# EN and ZH cannot drift apart in structure (dist/README.md).
+for builder, content in [("_build/build_deck.py", "deck_content"),
+                         ("_build/build_docx.py", "doc_content")]:
+    src = (ROOT / builder).read_text(encoding="utf-8-sig")
+    check(f"{builder} imports {content}", f"from {content} import" in src)
+    check(f"{builder} builds both languages", 'for lang in ("en", "zh")' in src)
+
+deck_src = (ROOT / "_build/deck_content.py").read_text(encoding="utf-8-sig")
+doc_src = (ROOT / "_build/doc_content.py").read_text(encoding="utf-8-sig")
+check("doc_content reuses the deck's L() marker", "from deck_content import L" in doc_src)
+mck_src = (ROOT / "_build/mck.py").read_text(encoding="utf-8-sig")
+check("every slide run sets an eastAsia font", "a:ea" in mck_src)
+docx_src = (ROOT / "_build/build_docx.py").read_text(encoding="utf-8-sig")
+check("every docx run sets w:eastAsia", "w:eastAsia" in docx_src)
+
+for f in ("dist/gstack-tutorial-3_EN.pptx", "dist/gstack-tutorial-3_ZH.pptx",
+          "dist/gstack-tutorial-3_EN.docx", "dist/gstack-tutorial-3_ZH.docx"):
+    p = ROOT / f
+    check(f"{f} is a non-trivial file", p.exists() and p.stat().st_size > 20_000,
+          f"{p.stat().st_size if p.exists() else 0} bytes")
 
 print(f"\n{'=' * 50}")
 if failures:
