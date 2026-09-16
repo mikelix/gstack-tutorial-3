@@ -53,7 +53,7 @@ SLIDES = [
         meta=[T("gstack orchestration + one domain reviewer",
                 "gstack 流程编排 + 一位领域审阅者"),
               T("Prof. Yi-Kuen Lee  ·  September 2026",
-                "李奕锟 教授  ·  2026 年 9 月"),
+                "李贻昆教授  ·  2026 年 9 月"),
               T("Prose CC BY 4.0 · Code Apache-2.0",
                 "文字 CC BY 4.0 · 代码 Apache-2.0")],
     )),
@@ -113,7 +113,7 @@ SLIDES = [
 
     ("table", dict(
         kicker=T("Failure modes", "失效模式"),
-        title=T("Each stage can report success while producing the wrong artifact",
+        title=T("Each stage can report success while producing the wrong output",
                 "每个阶段都可能一边报告成功，一边产出错误结果"),
         headers=[T("Stage", "阶段"), T("How it fails quietly", "它如何静默失败"),
                  T("What catches it", "由谁抓住")],

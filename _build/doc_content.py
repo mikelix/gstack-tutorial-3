@@ -18,7 +18,7 @@ DOC = {
     "meta": [
         T("gstack orchestration + one domain reviewer",
           "gstack 流程编排 + 一位领域审阅者"),
-        T("Prof. Yi-Kuen Lee", "李奕锟 教授"),
+        T("Prof. Yi-Kuen Lee", "李贻昆教授"),
         T("September 2026", "2026 年 9 月"),
         T("Prose CC BY 4.0 · Code Apache-2.0", "文字 CC BY 4.0 · 代码 Apache-2.0"),
     ],
