@@ -1,10 +1,13 @@
 # gstack-tutorial-3 — English → Chinese Video Captioning with videocaptioner
 
-> **Status: shipped locally, not yet published.** All five audit-trail
-> reviews, bilingual tutorial + reference docs, gate chain as verified
-> runnable code, bilingual `.pptx`/`.docx` deliverables, `LICENSE.md`, and a
-> 97-check CI self-check are all in place (`reviews/05-ship.md`). No GitHub
-> repository exists yet — publishing is a separate, explicit step.
+[![repo self-check](https://github.com/mikelix/gstack-tutorial-3/actions/workflows/selfcheck.yml/badge.svg)](https://github.com/mikelix/gstack-tutorial-3/actions/workflows/selfcheck.yml)
+[![Licence: CC BY 4.0 / Apache-2.0](https://img.shields.io/badge/licence-CC%20BY%204.0%20%2F%20Apache--2.0-blue.svg)](LICENSE.md)
+
+> **Status: published.** <https://github.com/mikelix/gstack-tutorial-3> —
+> see `PUBLISH.md`. All five audit-trail reviews, bilingual tutorial +
+> reference docs, gate chain as verified runnable code, bilingual
+> `.pptx`/`.docx` deliverables, `LICENSE.md`, and a 100-check CI self-check
+> (green on first push) are all in place (`reviews/05-ship.md`).
 
 **What this is.** A hands-on tutorial: use the **gstack** agent workflow plus
 one domain agent (a Bilingual Caption QA Specialist) to build and verify a

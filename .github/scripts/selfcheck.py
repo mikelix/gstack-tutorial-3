@@ -53,6 +53,7 @@ REQUIRED = [
     "dist/gstack-tutorial-3_ZH.docx",
     "docs/deck_market_benchmark.md",
     "reviews/05-ship.md",
+    "PUBLISH.md",
 ]
 
 failures: list[str] = []
