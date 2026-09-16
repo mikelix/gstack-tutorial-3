@@ -57,3 +57,47 @@ document-only: **action titles**. Every content slide's title is a sentence
 carrying the takeaway, not a topic label. Read the titles alone and you get
 the whole argument — the single convention that most separates a consulting
 deck from a corporate one.
+
+## Type scale and the autofit bug (read before touching `mck.py`)
+
+The deck's type scale was raised from an original 21pt title / 14pt body to
+a 30pt-minimum-for-prose floor after the project owner hand-tested the first
+version and found it too small to present. Getting there exposed a real
+python-pptx bug worth understanding before changing any layout code:
+
+**New textboxes default to `spAutoFit`** — PowerPoint independently resizes
+the *shape* to fit its real text content, regardless of the height passed to
+`add_textbox()`. Every element in this file is positioned from an estimated
+height computed in Python; if PowerPoint's real rendered height differs from
+that estimate, the mismatch used to show up as silently overlapping text or
+a dead gap, one layer removed from the actual bug. `mck.textbox()` now sets
+`tf.auto_size = MSO_AUTO_SIZE.NONE` on every textbox for exactly this
+reason — do not remove it.
+
+With autofit disabled, the box is authoritative, so an imperfect height
+*estimate* only wastes a little whitespace instead of causing an overlap —
+but the character-width model behind those estimates (`_line_capacity` /
+`_wrapped_lines`) is a hand-calibrated approximation, not real font
+metrics, and it has been wrong in both directions on different content.
+Two defenses are layered on top of it:
+
+1. **Auto-fit with a safety margin.** `slide_bullets` and `slide_two_col`
+   try font sizes from target down to floor and require the *estimated*
+   height to clear the available space by 15% before accepting a size —
+   because the estimate has repeatedly landed a few percent short of
+   PowerPoint's real rendered height.
+2. **A build-time `WARN` line** whenever content lands below its target
+   size. This is a prompt to shorten the content or restructure it (see the
+   two "bullets → table" conversions in `deck_content.py`'s history — a list
+   of "term: explanation" pairs fits a table's row-based layout far more
+   reliably than free-flowing bullet text), not something to silence by
+   loosening the margin further.
+
+**If you see an overflow that WARN didn't catch or a fix didn't resolve**,
+don't hand-tune the margin blind — write a small script that imports `mck`
+and the real slide-building function, calls it against a live
+`Presentation()`, and prints the actual computed `body_y`/`avail_in`/predicted
+height for that specific slide (see git history around the two_col and
+bullets overflow fixes for the exact pattern). Hand-deriving these numbers
+from the constants repeatedly produced wrong answers in this file's own
+history — call the real code and print the real numbers instead.

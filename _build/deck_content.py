@@ -86,7 +86,7 @@ SLIDES = [
     ("bignum", dict(
         kicker=T("What you get", "交付成果"),
         title=T("One sitting takes a raw clip to a captioned output you can defend",
-                "一次专注работы，就能把原始片段变成经得起追问的成品"),
+                "一次专注投入，就能把原始片段变成经得起追问的成品"),
         stats=[
             (T("5", "5"), T("verification gates", "道验证关卡"),
              T("Four mechanical, one human — the split is deliberate",
@@ -156,19 +156,16 @@ SLIDES = [
             "$ videocaptioner subtitle probe.srt --translator google \\",
             "      --target-language zh-Hans --layout target-only -o out.srt",
             "",
-            "ERROR - Google translation failed 1: 429 Too Many Requests",
-            "ERROR - Google translation failed 2: 429 Too Many Requests",
-            "OK Done -> out.srt (2 segments)",
-            "exit code: 0",
+            "ERROR - Google translation failed (x2): 429 Too Many Requests",
+            "OK Done -> out.srt (2 segments)   exit code: 0",
             "",
-            "$ cat out.srt",
-            "hello this is a short test          # <- still English",
-            "of the translation pipeline         # <- still English",
+            "$ cat out.srt        # both lines still English:",
+            "hello this is a short test",
+            "of the translation pipeline",
         ],
-        note=T("The errors were logged, then swallowed. Exit code 0. Correct segment "
-               "count. A well-formed file. The only thing wrong with it was that it "
-               "contained no Chinese.",
-               "错误被记录，然后被吞掉。退出码 0。分段数正确。文件格式良好。它唯一的问题是：里面没有中文。"),
+        note=T("Logged, swallowed, exit 0, correct count, well-formed file — the only "
+               "thing wrong was zero Chinese.",
+               "错误被记录后吞掉，退出码 0，分段数正确，文件格式良好 —— 唯一的问题是零中文。"),
         source=T("Observed 2026-09-15, videocaptioner 1.4.2, Windows 11, Hong Kong network",
                  "观测于 2026-09-15，videocaptioner 1.4.2，Windows 11，香港网络"),
     )),
@@ -304,27 +301,30 @@ SLIDES = [
                "Windows 11、macOS、Linux 的完整分步说明见 starter/INSTALL.md"),
     )),
 
-    ("bullets", dict(
+    ("table", dict(
         kicker=T("Translator choice", "翻译服务选择"),
         title=T("Do not copy our translator — your access is not our access",
                 "不要照搬我们的翻译服务 —— 你的访问条件与我们不同"),
-        lead=T("The first draft of this tutorial told readers to use --translator llm "
-               "and never fall back. That was our API setup restated as a universal rule.",
-               "本教程初稿要求读者使用 --translator llm 且绝不回退。那其实只是把我们自己的 API 配置当成了普适规则。"),
-        bullets=[
-            T(("Default is bing, not llm.", "Omit the flag and you silently get Bing. "
-               "Every command in this tutorial names the translator explicitly."),
-              ("默认值是 bing，不是 llm。", "省略参数你就会悄悄用上 Bing。本教程每条命令都显式写出翻译服务。")),
-            T(("Free still needs a key.", "Split and Optimize are LLM steps regardless "
-               "of translator. Keyless readers also need --no-optimize --no-split."),
-              ("免费也仍需密钥。", "断句和优化无论选哪个翻译服务都由 LLM 驱动。没有密钥的读者还需加 --no-optimize --no-split。")),
-            T(("Region decides more than budget.", "Behind a restrictive firewall, "
-               "Google and Bing endpoints are often unreachable; a domestic LLM endpoint is not."),
-              ("地域比预算更具决定性。", "在严格防火墙之后，Google 与 Bing 端点常常不可达，而境内 LLM 端点通常可达。")),
-            T(("Cost is rarely the barrier.", "An hour of speech costs less than a cup "
-               "of coffee. Obtaining a key and a payment method is the real hurdle."),
-              ("费用很少是障碍。", "一小时语音的翻译成本不到一杯咖啡。真正的门槛是拿到密钥和支付方式。")),
+        headers=[T("Reality", "现实"), T("What that means for you", "对你意味着什么")],
+        widths=[3.4, 6.6],
+        rows=[
+            [T("Default is bing, not llm", "默认值是 bing，不是 llm"),
+             T("Omit the flag and you silently get Bing — every command here names the translator explicitly",
+               "省略参数就会悄悄用上 Bing —— 本教程每条命令都显式写出翻译服务")],
+            [T("Free still needs a key", "免费也仍需密钥"),
+             T("Split/Optimize are LLM steps regardless of translator; keyless readers also need --no-optimize --no-split",
+               "断句和优化无论选哪个都由 LLM 驱动；没有密钥的读者还需加 --no-optimize --no-split")],
+            [T("Region beats budget", "地域比预算更关键"),
+             T("Behind a restrictive firewall, Google/Bing are often unreachable; a domestic LLM endpoint usually isn't",
+               "在严格防火墙之后，Google/Bing 常不可达，而境内 LLM 端点通常可达")],
+            [T("Cost is rarely the barrier", "费用很少是障碍"),
+             T("An hour of speech costs less than a coffee — obtaining a key and payment method is the real hurdle",
+               "一小时语音成本不到一杯咖啡 —— 拿到密钥和支付方式才是真门槛")],
         ],
+        emphasis_col=0,
+        lead=T("The first draft told readers to use --translator llm and never fall back "
+               "— our API setup restated as a universal rule.",
+               "本教程初稿要求使用 --translator llm 且绝不回退 —— 那只是把我们的 API 配置当成了普适规则。"),
         source=T("Full decision guide: docs/choosing_a_translator.md",
                  "完整决策指南：docs/choosing_a_translator.md"),
     )),
@@ -559,27 +559,30 @@ SLIDES = [
                  "BOM 缺陷是我们自己的 —— 只因为一个测试文件来自 PowerShell 而非 videocaptioner 才被发现"),
     )),
 
-    ("bullets", dict(
+    ("table", dict(
         kicker=T("Transferable disciplines", "可迁移的纪律"),
         title=T("Five habits that apply to any pipeline where a wrong artifact is expensive",
                 "五个习惯，适用于任何「产出错误结果代价高昂」的流水线"),
-        bullets=[
-            T(("Check the output, not the exit code.", "Every failure in our pitfall "
-               "ledger reported success at least once."),
-              ("检查输出，而不是退出码。", "我们坑位清单里的每一个失败，都至少曾报告过一次成功。")),
-            T(("Never verify an artifact against itself.", "OCR-vs-own-srt here; an LVS "
-               "netlist derived from the GDS under test in Tutorial #2. Same error."),
-              ("绝不用产物自己验证自己。", "这里是 OCR 对比自己的 srt；教程 #2 里是从待测 GDS 导出的网表跑 LVS。同一个错误。")),
-            T(("Give \"meaningless\" its own signal.", "VOID has a distinct exit code so "
-               "it can never be mistaken for PASS by a script or a skimming reviewer."),
-              ("给「无意义」一个独立信号。", "VOID 有独立退出码，脚本或快速浏览的审阅者都不会把它误认为 PASS。")),
-            T(("Name the gap you cannot close.", "Gate T5 is not automated and the docs "
-               "say so plainly, rather than implying full coverage."),
-              ("明确点出你封不住的缺口。", "Gate T5 没有自动化，文档就直说，而不是暗示覆盖完整。")),
-            T(("The reader's environment is not yours.", "The translator-choice chapter "
-               "exists because our first draft handed down our own API setup as a rule."),
-              ("读者的环境不是你的环境。", "「翻译服务选择」一章之所以存在，是因为初稿把我们自己的 API 配置当成了规则。")),
+        headers=[T("Discipline", "纪律"), T("Why", "为什么")],
+        widths=[3.6, 6.4],
+        rows=[
+            [T("Check the output, not the exit code", "检查输出，而不是退出码"),
+             T("Every failure in our pitfall ledger reported success at least once",
+               "我们坑位清单里的每一个失败，都至少曾报告过一次成功")],
+            [T("Never verify an artifact against itself", "绝不用产物自己验证自己"),
+             T("OCR-vs-own-srt here; an LVS netlist derived from the GDS under test in Tutorial #2 — same error",
+               "这里是 OCR 对比自己的 srt；教程 #2 是从待测 GDS 导出网表跑 LVS —— 同一个错误")],
+            [T("Give \"meaningless\" its own signal", "给「无意义」一个独立信号"),
+             T("VOID has a distinct exit code so it can never be mistaken for PASS",
+               "VOID 有独立退出码，不会被误认为 PASS")],
+            [T("Name the gap you cannot close", "明确点出你封不住的缺口"),
+             T("Gate T5 is not automated and the docs say so, not implying full coverage",
+               "Gate T5 没有自动化，文档就直说，而非暗示覆盖完整")],
+            [T("The reader's environment is not yours", "读者的环境不是你的环境"),
+             T("The translator-choice chapter exists because our first draft handed down our own API setup as a rule",
+               "「翻译服务选择」一章的由来：初稿曾把我们自己的 API 配置当成了规则")],
         ],
+        emphasis_col=0,
     )),
 
     ("table", dict(
