@@ -55,6 +55,7 @@ lighter — one domain agent, not two, and its veto only fires on the one gate
 | **[`TUTORIAL.md`](TUTORIAL.md)** | **The step-by-step course — start here.** Part 0 mental model → install → translator choice → the five gstack phases → verification → troubleshooting → appendices |
 | [`TUTORIAL.zh.md`](TUTORIAL.zh.md) | 简体中文版，与英文版逐节对应（parity enforced in CI） |
 | [`PLAN.md`](PLAN.md) | Scope, team topology, 5-gate verification chain, ranked risks, Definition of Done |
+| [`PLAYBOOK.md`](PLAYBOOK.md) | **How this tutorial was actually built, for whoever writes No. 4** — the ten-step process, the authority contract, a 13-entry pitfall ledger, and what changed from tutorial #2's playbook and why |
 | [`starter/INSTALL.md`](starter/INSTALL.md) | **Step-by-step videocaptioner install** — Windows 11 (primary, fully detailed), macOS, Linux |
 | [`starter/sample/`](starter/sample/README.md) | **A real, rights-clear worked example** — a synthetic ~12s clip (generated visual + offline TTS, zero third-party footage) already run through the full pipeline; verify it with `run_gates.py` before installing anything |
 | [`docs/expertise_division.md`](docs/expertise_division.md) / [`.zh.md`](docs/expertise_division.zh.md) | **The Gate T5 procedure** — what the Bilingual Caption QA Specialist concretely does, RACI, defer clause |

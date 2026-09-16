@@ -25,6 +25,7 @@ REQUIRED = [
     "README.md",
     "LICENSE.md",
     "PLAN.md",
+    "PLAYBOOK.md",
     "TUTORIAL.md",
     "TUTORIAL.zh.md",
     "docs/expertise_division.md",

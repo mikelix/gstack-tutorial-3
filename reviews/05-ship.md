@@ -218,3 +218,18 @@ made explicit and permanent rather than left implicit. Added: a new
 `TUTORIAL.zh.md` (parity preserved — both are blockquotes, not headers, so
 `selfcheck.py`'s H2/H3 parity counts are unaffected). `selfcheck.py`
 re-run clean at 113/113 after the change.
+
+**Post-publish addition — `PLAYBOOK.md` for tutorial #4.** The owner asked
+for a summary of how this tutorial was actually built, for the next gstack
+tutorial project. Modeled on `gstack-tutorial-2/PLAYBOOK.md` (the document
+this repo's own `PLAN.md` cites as its own starting point) but written from
+what actually happened here rather than restating the predecessor: the
+lighter one-domain-agent topology and why (`reviews/01-ceo-review.md`'s S0
+question), the `L(en, zh)` single-content-source pattern as a real
+improvement over tutorial #2's two-hand-synced-build-scripts approach, the
+Gate T3b passthrough-detection lesson generalized beyond this project, and a
+13-entry pitfall ledger covering every real defect found this session (the
+`spAutoFit` bug, PowerShell/CRT quoting on both Python and git argv, the
+hand-edit that regressed the CJK guarantee, and the sample-clip rights
+decision). Added to `selfcheck.py`'s required-file list and referenced from
+`README.md`'s layout table. `selfcheck.py` re-run clean at 115/115.
