@@ -14,6 +14,14 @@ Part 2 walks you through.
 
 中文版：[`TUTORIAL.zh.md`](TUTORIAL.zh.md)
 
+> **Educational use notice.** This tutorial, and the sample clip in
+> [`starter/sample/`](starter/sample/README.md), are provided for
+> educational purposes only — to teach a verifiable captioning workflow.
+> Apply the source-clip diligence Part 2 and [`LICENSE.md`](LICENSE.md)
+> describe to any video you caption with it: this project does not grant
+> rights to any third-party footage, and nothing here is legal advice on
+> copyright.
+
 ---
 
 ## Part 0 — The mental model
@@ -107,6 +115,28 @@ thing.
 
 This is tutorial #2's LVS circularity lesson, transplanted. If you learn one
 transferable idea from this tutorial, make it this one.
+
+### 0.6 See it work in 30 seconds, before installing anything
+
+[`starter/sample/`](starter/sample/) ships a real, tiny (~12s) worked
+example — source clip, corrected English transcript, Chinese translation,
+and the final captioned output — already run through this exact pipeline.
+`run_gates.py` only needs Python and FFmpeg, not `videocaptioner` itself,
+so you can verify a real result right now:
+
+```bash
+python starter/scripts/run_gates.py \
+    --source-video starter/sample/sample_clip.mp4 \
+    --source-srt starter/sample/sample_clip.srt \
+    --target-srt starter/sample/sample_clip_zh.srt \
+    --output-video starter/sample/sample_clip_captioned.mp4 \
+    --translator llm --target-language zh-Hans
+```
+
+Expect `T1`-`T4` all `PASS`. This sample's video and narration were both
+generated for this tutorial (no third-party footage — see
+`starter/sample/README.md` for exactly how and why), so it's safe to look at
+and safe for this repo to ship publicly.
 
 ### Checkpoint 0
 

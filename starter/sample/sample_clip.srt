@@ -1,0 +1,7 @@
+1
+00:00:00,000 --> 00:00:04,870
+Hello, this is a short sample clip for gstack Tutorial 3
+
+2
+00:00:04,870 --> 00:00:10,650
+We test the pipeline: transcribe, translate, and burn in Chinese captions.

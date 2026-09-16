@@ -9,6 +9,13 @@
 > `.pptx`/`.docx` deliverables, `LICENSE.md`, and a 100-check CI self-check
 > (green on first push) are all in place (`reviews/05-ship.md`).
 
+> **Educational use notice.** This repository — including the sample clip
+> in `starter/sample/` — is provided for educational purposes only, to
+> teach a verifiable video-captioning workflow. It does not grant rights to
+> any third-party video, audio, or footage; readers are responsible for
+> clearing rights on any clip they caption with it. See `LICENSE.md` for
+> full terms.
+
 **What this is.** A hands-on tutorial: use the **gstack** agent workflow plus
 one domain agent (a Bilingual Caption QA Specialist) to build and verify a
 real English→Chinese video-captioning pipeline with `videocaptioner` — ASR
@@ -49,6 +56,7 @@ lighter — one domain agent, not two, and its veto only fires on the one gate
 | [`TUTORIAL.zh.md`](TUTORIAL.zh.md) | 简体中文版，与英文版逐节对应（parity enforced in CI） |
 | [`PLAN.md`](PLAN.md) | Scope, team topology, 5-gate verification chain, ranked risks, Definition of Done |
 | [`starter/INSTALL.md`](starter/INSTALL.md) | **Step-by-step videocaptioner install** — Windows 11 (primary, fully detailed), macOS, Linux |
+| [`starter/sample/`](starter/sample/README.md) | **A real, rights-clear worked example** — a synthetic ~12s clip (generated visual + offline TTS, zero third-party footage) already run through the full pipeline; verify it with `run_gates.py` before installing anything |
 | [`docs/expertise_division.md`](docs/expertise_division.md) / [`.zh.md`](docs/expertise_division.zh.md) | **The Gate T5 procedure** — what the Bilingual Caption QA Specialist concretely does, RACI, defer clause |
 | [`reviews/01-ceo-review.md`](reviews/01-ceo-review.md) | First audit-trail record — a real REVISE→PASS review of this repo's own `PLAN.md`, blocking issues and all |
 | [`reviews/02-spec.md`](reviews/02-spec.md) | W1-W10 work breakdown, critical path, two escalations to the domain agent, and a revised (honest) time budget |

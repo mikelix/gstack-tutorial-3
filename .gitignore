@@ -1,8 +1,16 @@
 # Source media is user-supplied and large; the tutorial ships samples separately,
-# not full clips. Never commit a real end-user video.
+# not full clips. Never commit a real end-user video — a reader's or the
+# author's own pilot footage may carry rights the author cannot redistribute.
 *.mp4
 *.mkv
 *.mov
+
+# Narrow, deliberate exception: starter/sample/ is a purpose-built synthetic
+# clip (generated background + offline TTS narration, see starter/sample/README.md)
+# with no rights ambiguity, committed specifically so a reader can see a real
+# result and run the gate chain before installing anything. This does NOT
+# reopen the door to committing real footage anywhere else in the repo.
+!/starter/sample/*.mp4
 
 # Generated subtitle/caption working files from running the tutorial yourself —
 # the repo ships example .srt files under starter/, not your own run's output.

@@ -164,3 +164,57 @@ explicit action requiring the project owner's go-ahead before it happens, not
 a default step of `/ship`. Tutorial #2's own `PUBLISH.md` documents the
 actual publish sequence (`gh repo create ... --public`, then a proxy-clearing
 push workaround) to follow when that go-ahead is given.
+
+---
+
+## Addendum
+
+**2026-09-16, same day — after publishing.** The owner gave the explicit
+go-ahead; see `PUBLISH.md` for the full publish record
+(<https://github.com/mikelix/gstack-tutorial-3>, `v1.0` released, CI green).
+Two follow-ups landed after the initial publish, both audited here rather
+than silently folded in:
+
+**Post-publish fix — wrong Chinese name.** The author's name rendered as
+`李奕锟` instead of the correct `李贻昆` in the ZH deck and Word document.
+The author caught it and initially hand-corrected the shipped `dist/` files
+directly; per this repo's own "fix the source, not the output" rule
+(`dist/README.md`), the correction was ported to `_build/deck_content.py`
+and `_build/doc_content.py` and both formats rebuilt — which also caught
+that the hand-edited `.docx` had regressed the `eastAsia`-on-every-run CJK
+guarantee (526/880 vs. the generator's clean 283/283). Two of three PPTX
+edits the author made by hand were also reconciled against source rather
+than assumed: one ("wrong artifact" → "wrong output") was a legitimate,
+low-risk wording change and was ported; the other (an executive-summary
+title edit that broke grammar — "is Actual skill", missing "the") was
+flagged back to the author rather than guessed at, and was not ported.
+
+**Post-publish addition — a rights-clear sample clip (`starter/sample/`).**
+The owner's suggestion — ship a short worked example so a reader can see a
+real result immediately — was good, but the obvious source (the pilot's own
+downloaded interview clip) is not the author's to redistribute: no creator
+metadata, and a baked-in caption style typical of third-party recording
+software, confirmed during the pilot itself
+(`docs/choosing_a_translator.md`'s own pilot notes). Publishing even a
+10-second excerpt into this public, CC-BY-licensed repo would have been a
+real rights problem, not a hypothetical one, so this was raised explicitly
+rather than executed on request — the owner chose a synthetic clip
+(generated visual + offline TTS narration, zero rights ambiguity) over the
+alternative of shipping the real footage anyway. `starter/sample/README.md`
+documents exactly how it was built, reproducibly. The clip was run through
+the *actual* documented pipeline (not faked): Gates T1-T4 all PASS, one real
+ASR error was hand-corrected ("gestack" → "gstack") exactly as the tutorial
+teaches, and Gate T5 was checked by eye (natural, faithful, no
+hallucination) before committing it. `reviews/02-spec.md` S1 records this as
+a partial supersession, not a silent scope change.
+
+**Post-publish addition — explicit educational-use notice.** The owner asked
+for a standing notice, in the key reader-facing documents, that this project
+is for educational purposes and grants no rights to third-party footage —
+the same caution already applied case-by-case to the sample clip above,
+made explicit and permanent rather than left implicit. Added: a new
+"Educational use" section in `LICENSE.md`; a status-line notice in
+`README.md`; and a matching blockquote near the top of `TUTORIAL.md` and
+`TUTORIAL.zh.md` (parity preserved — both are blockquotes, not headers, so
+`selfcheck.py`'s H2/H3 parity counts are unaffected). `selfcheck.py`
+re-run clean at 113/113 after the change.

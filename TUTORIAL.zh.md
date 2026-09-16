@@ -12,6 +12,12 @@
 
 English version: [`TUTORIAL.md`](TUTORIAL.md)
 
+> **教育用途声明。** 本教程以及 [`starter/sample/`](starter/sample/README.md)
+> 中的示例片段，仅供教学使用 —— 目的是讲授一套可验证的字幕制作流程。对你
+> 用它来字幕化的任何视频，请遵循第 2 部分与 [`LICENSE.md`](LICENSE.md) 所述
+> 的素材版权审查原则：本项目不授予任何第三方素材的使用权，本文档也不构成
+> 版权法律意见。
+
 ---
 
 ## 第 0 部分 —— 心智模型
@@ -101,6 +107,27 @@ gstack 的流程角色能数分段、比对时长、在配置文件里检索字�
 
 这正是教程 #2 的 LVS 循环论证教训的移植版。如果你只从本教程带走一个
 可迁移的概念，请让它是这一个。
+
+### 0.6 30 秒内看到真实结果，甚至不用先安装任何东西
+
+[`starter/sample/`](starter/sample/) 提供了一个真实的、极短（约 12 秒）的
+完整实例——源片段、经过校正的英文转写稿、中文译文，以及最终带字幕的输出，
+全部已经用这套完整流程跑过一遍。`run_gates.py` 只需要 Python 和
+FFmpeg——不需要 `videocaptioner` 本身——所以你现在就能验证一个真实结果：
+
+```bash
+python starter/scripts/run_gates.py \
+    --source-video starter/sample/sample_clip.mp4 \
+    --source-srt starter/sample/sample_clip.srt \
+    --target-srt starter/sample/sample_clip_zh.srt \
+    --output-video starter/sample/sample_clip_captioned.mp4 \
+    --translator llm --target-language zh-Hans
+```
+
+预期结果：`T1`-`T4` 全部 `PASS`。这个样例的画面与配音都是专为本教程生成的
+（不含任何第三方素材——具体做法与原因见
+`starter/sample/README.md`），所以可以放心查看，本仓库公开发布也不涉及
+版权问题。
 
 ### 检查点 0
 

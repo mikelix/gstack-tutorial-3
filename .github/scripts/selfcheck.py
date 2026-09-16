@@ -54,6 +54,11 @@ REQUIRED = [
     "docs/deck_market_benchmark.md",
     "reviews/05-ship.md",
     "PUBLISH.md",
+    "starter/sample/README.md",
+    "starter/sample/sample_clip.mp4",
+    "starter/sample/sample_clip.srt",
+    "starter/sample/sample_clip_zh.srt",
+    "starter/sample/sample_clip_captioned.mp4",
 ]
 
 failures: list[str] = []

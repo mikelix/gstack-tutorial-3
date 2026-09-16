@@ -107,7 +107,7 @@ blocker — the CEO's scope (D1-D5) stands; only the estimate changed.
 
 | # | Decision |
 |---|---|
-| S1 | `starter/` ships install instructions and (later) gate-chain scripts. It does not vendor `videocaptioner` itself or any sample video — same "pointer, not payload" principle as tutorial #2 S1, applied to a much smaller payload. |
+| S1 | `starter/` ships install instructions and gate-chain scripts. It does not vendor `videocaptioner` itself or any *real* sample video — same "pointer, not payload" principle as tutorial #2 S1. **Superseded in part, 2026-09-16:** `starter/sample/` now ships a small, purpose-built *synthetic* clip (generated visual + offline TTS narration, zero rights ambiguity) so a reader can see a real result and run the gate chain before installing anything — see `starter/sample/README.md`. The constraint against vendoring *real* footage (a reader's or the author's own pilot video, which may carry rights the author cannot redistribute) still stands. |
 | S2 | Gates are numbered T1-T5 (Tutorial-3-local numbering) — no relationship to tutorial #2's Gate 5/6/7A/7B-1R2 numbering. Do not try to make the numbers line up across tutorials; the subjects don't share a gate chain. |
 | S3 | Sampling for Gate T3 (mechanical count) and Gate T5 (fidelity) both use segments 1-5 / ~50% / last-5 for now. E2 may revise this for long clips — until then, this is the standard. |
 | S4 | W7 (style config) is conditional, not mandatory. A clean source video (no pre-existing captions) skips it entirely — do not treat "no style work needed" as an incomplete run. |
